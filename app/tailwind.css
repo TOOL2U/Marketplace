@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white;
+  font-family: 'Inter', sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-[#FFF02B] text-[#000000] hover:bg-opacity-90;
+  }
+  
+  .btn-secondary {
+    @apply bg-[#4D4D4D] text-white hover:bg-opacity-90;
+  }
+  
+  .btn-outline {
+    @apply border border-[#4D4D4D] text-[#4D4D4D] hover:bg-[#4D4D4D] hover:text-white;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  }
+
+  .icon-container {
+    @apply bg-black p-4 rounded-full mb-4 transition-transform transform hover:scale-110;
+  }
+
+  .icon {
+    @apply text-yellow text-3xl;
+  }
+}
