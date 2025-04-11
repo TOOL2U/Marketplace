@@ -3,13 +3,6 @@ import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaCheck } from "react-icons/fa";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 
-// Helper component for styled check icons
-const StyledCheckIcon = () => (
-  <div className="bg-black w-5 h-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0 transition-transform duration-300 ease-in-out hover:scale-110">
-    <FaCheck className="text-yellow text-xs" />
-  </div>
-);
-
 export default function ServiceDetail() {
   const { serviceId } = useParams();
   const formattedServiceName = serviceId ? serviceId.charAt(0).toUpperCase() + serviceId.slice(1) : "";
@@ -93,19 +86,19 @@ export default function ServiceDetail() {
                 <h3 className="font-semibold mb-2">What's included:</h3>
                 <ul className="space-y-2">
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Professional assessment</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Quality workmanship</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Licensed and insured professionals</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Satisfaction guarantee</span>
                   </li>
                 </ul>
@@ -114,19 +107,19 @@ export default function ServiceDetail() {
                 <h3 className="font-semibold mb-2">Why choose us:</h3>
                 <ul className="space-y-2">
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Vetted professionals</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Transparent pricing</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Flexible scheduling</span>
                   </li>
                   <li className="flex items-center">
-                    <StyledCheckIcon /> {/* Updated Icon */}
+                    <FaCheck className="text-green-500 mr-2" />
                     <span>Customer support</span>
                   </li>
                 </ul>

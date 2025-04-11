@@ -10,63 +10,44 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-black text-yellow shadow-md fixed top-0 left-0 right-0 z-50">
+    <header className="bg-white shadow-sm">
       <div className="container-custom py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold text-yellow">MAN2U</span>
+            <span className="text-2xl font-bold text-black">Fix<span className="text-yellow">It</span></span>
           </Link>
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-yellow"
+            className="md:hidden text-darkgray"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <FaTimes size={50} /> : <FaBars size={24} />}
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
-            >
+            <Link to="/" className="text-darkgray hover:text-black font-medium">
               Home
             </Link>
-            <Link 
-              to="/services" 
-              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
-            >
+            <Link to="/services" className="text-darkgray hover:text-black font-medium">
               Services
             </Link>
-            <Link 
-              to="/providers" 
-              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
-            >
+            <Link to="/providers" className="text-darkgray hover:text-black font-medium">
               Providers
             </Link>
-            <Link 
-              to="/about" 
-              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
-            >
+            <Link to="/about" className="text-darkgray hover:text-black font-medium">
               About
             </Link>
           </nav>
 
           {/* Auth buttons - desktop */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link 
-              to="/login" 
-              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
-            >
+            <Link to="/login" className="text-darkgray hover:text-black font-medium">
               Login
             </Link>
-            <Link 
-              to="/signup" 
-              className="btn bg-yellow text-black hover:bg-yellow/90 px-4 py-2 rounded font-medium transition-colors duration-200"
-            >
+            <Link to="/signup" className="btn btn-primary">
               Sign Up
             </Link>
           </div>
@@ -74,49 +55,25 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-black"> {/* Ensure mobile menu also has black background */}
+          <div className="md:hidden mt-4 pb-4">
             <nav className="flex flex-col space-y-4">
-              <Link 
-                to="/" 
-                className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
-                onClick={toggleMenu}
-              >
+              <Link to="/" className="text-darkgray hover:text-black font-medium" onClick={toggleMenu}>
                 Home
               </Link>
-              <Link 
-                to="/services" 
-                className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
-                onClick={toggleMenu}
-              >
+              <Link to="/services" className="text-darkgray hover:text-black font-medium" onClick={toggleMenu}>
                 Services
               </Link>
-              <Link 
-                to="/providers" 
-                className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
-                onClick={toggleMenu}
-              >
+              <Link to="/providers" className="text-darkgray hover:text-black font-medium" onClick={toggleMenu}>
                 Providers
               </Link>
-              <Link 
-                to="/about" 
-                className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
-                onClick={toggleMenu}
-              >
+              <Link to="/about" className="text-darkgray hover:text-black font-medium" onClick={toggleMenu}>
                 About
               </Link>
-              <div className="flex flex-col space-y-2 pt-2 border-t border-gray-700"> {/* Adjusted border color */}
-                <Link 
-                  to="/login" 
-                  className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
-                  onClick={toggleMenu}
-                >
+              <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                <Link to="/login" className="text-darkgray hover:text-black font-medium" onClick={toggleMenu}>
                   Login
                 </Link>
-                <Link 
-                  to="/signup" 
-                  className="btn bg-yellow text-black hover:bg-yellow/90 w-full text-center mt-2 py-2 rounded font-medium transition-colors duration-200" 
-                  onClick={toggleMenu}
-                >
+                <Link to="/signup" className="btn btn-primary w-full text-center" onClick={toggleMenu}>
                   Sign Up
                 </Link>
               </div>
