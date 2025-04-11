@@ -3,6 +3,7 @@ import { FaTools, FaPlug, FaTree, FaHammer, FaWrench, FaPaintRoller, FaBroom, Fa
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import SearchBar from "~/components/SearchBar";
+import ServiceCard from "~/components/ServiceCard"; // Import ServiceCard
 
 export default function ServicesIndex() {
   const services = [
@@ -45,17 +46,13 @@ export default function ServicesIndex() {
           <h2 className="text-3xl font-bold mb-12 text-center">All Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {services.map((service) => (
-              <Link key={service.id} to={`/services/${service.title.toLowerCase()}`} className="block">
-                <div className="card hover:shadow-lg transition-shadow h-full">
-                  <div className="p-6 flex flex-col items-center text-center">
-                    <div className="bg-yellow p-4 rounded-full mb-4">
-                      {service.icon}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                    <p className="text-gray-600">{service.description}</p>
-                  </div>
-                </div>
-              </Link>
+              // Use ServiceCard component here
+              <ServiceCard 
+                key={service.id}
+                title={service.title}
+                icon={service.icon}
+                description={service.description}
+              />
             ))}
           </div>
         </div>

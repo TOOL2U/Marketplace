@@ -8,11 +8,12 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ title, icon, description }: ServiceCardProps) {
   return (
-    <Link to={`/services/${title.toLowerCase()}`} className="block">
+    <Link to={`/services/${title.toLowerCase()}`} className="block group">
       <div className="card hover:shadow-lg transition-shadow h-full">
         <div className="p-6 flex flex-col items-center text-center">
-          <div className="bg-yellow p-4 rounded-full mb-4">
-            {icon}
+          {/* Updated Icon Styling */}
+          <div className="bg-black p-4 rounded-full mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110">
+            <span className="text-yellow">{icon}</span>
           </div>
           <h3 className="text-xl font-semibold mb-2">{title}</h3>
           <p className="text-gray-600">{description}</p>

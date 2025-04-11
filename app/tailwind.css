@@ -2,34 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply bg-white;
-  font-family: 'Inter', sans-serif;
+@layer base {
+  body {
+    @apply font-sans text-darkgray; /* Default text color for body content */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-black; /* Default heading color */
+  }
 }
 
 @layer components {
-  .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors;
-  }
-  
-  .btn-primary {
-    @apply bg-[#FFF02B] text-[#000000] hover:bg-opacity-90;
-  }
-  
-  .btn-secondary {
-    @apply bg-[#4D4D4D] text-white hover:bg-opacity-90;
-  }
-  
-  .btn-outline {
-    @apply border border-[#4D4D4D] text-[#4D4D4D] hover:bg-[#4D4D4D] hover:text-white;
-  }
-  
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
-  .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+
+  .btn {
+    @apply inline-block px-6 py-2.5 rounded font-medium text-sm leading-tight shadow-md transition duration-150 ease-in-out;
   }
+
+  .btn-primary {
+    @apply bg-yellow text-black hover:bg-yellow/90 focus:outline-none focus:ring-0;
+  }
+
+  .btn-outline {
+     @apply border-2 border-black text-black hover:bg-black hover:text-white focus:outline-none focus:ring-0;
+     /* Note: Specific overrides might be needed like in the CTA section */
+  }
+
+  /* Add other reusable component styles here */
+}
+
+@layer utilities {
+  /* Add custom utility classes if needed */
 }
