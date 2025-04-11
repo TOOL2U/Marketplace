@@ -3,6 +3,20 @@ import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaCheck, FaThumbsUp, FaClock, Fa
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 
+// Helper component for styled icons in stats
+const StatIcon = ({ icon }: { icon: React.ReactNode }) => (
+  <div className="bg-black w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 transition-transform duration-300 ease-in-out hover:scale-110">
+    <span className="text-yellow text-xl">{icon}</span>
+  </div>
+);
+
+// Helper component for styled check icons
+const StyledCheckIcon = () => (
+  <div className="bg-black w-5 h-5 rounded-full flex items-center justify-center mr-2 flex-shrink-0 transition-transform duration-300 ease-in-out hover:scale-110">
+    <FaCheck className="text-yellow text-xs" />
+  </div>
+);
+
 export default function ProviderDetail() {
   const { providerId } = useParams();
   
@@ -108,24 +122,18 @@ export default function ProviderDetail() {
 
             {/* Provider Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div className="text-yellow text-2xl mb-2">
-                  <FaTools />
-                </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm text-center group">
+                <StatIcon icon={<FaTools />} /> {/* Updated Icon */}
                 <p className="font-semibold">{provider.yearsExperience}+ Years</p>
                 <p className="text-gray-600 text-sm">Experience</p>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div className="text-yellow text-2xl mb-2">
-                  <FaThumbsUp />
-                </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm text-center group">
+                <StatIcon icon={<FaThumbsUp />} /> {/* Updated Icon */}
                 <p className="font-semibold">{provider.completedJobs}+</p>
                 <p className="text-gray-600 text-sm">Jobs Completed</p>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div className="text-yellow text-2xl mb-2">
-                  <FaClock />
-                </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm text-center group">
+                <StatIcon icon={<FaClock />} /> {/* Updated Icon */}
                 <p className="font-semibold">{provider.responseTime}</p>
                 <p className="text-gray-600 text-sm">Response Time</p>
               </div>
@@ -138,7 +146,7 @@ export default function ProviderDetail() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {provider.services.map((service, index) => (
                     <div key={index} className="flex items-center">
-                      <FaCheck className="text-green-500 mr-2" />
+                      <StyledCheckIcon /> {/* Updated Icon */}
                       <span>{service}</span>
                     </div>
                   ))}
