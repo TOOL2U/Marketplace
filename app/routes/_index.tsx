@@ -5,7 +5,8 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import ServiceCard from "~/components/ServiceCard";
 import TestimonialCard from "~/components/TestimonialCard";
-import SearchBar from "~/components/SearchBar";
+// SearchBar is no longer directly used in the hero section, but might be used elsewhere
+// import SearchBar from "~/components/SearchBar";
 import { useEffect, useRef, useState } from "react";
 
 export const meta: MetaFunction = () => {
@@ -52,14 +53,14 @@ export default function Index() {
   ];
 
   // State for search and location
-  const [service, setService] = useState("");
+  const [service, setService] = useState(""); // Default to empty or first service
   const [location, setLocation] = useState("");
   const [isLocating, setIsLocating] = useState(false);
 
   // Function to get user's location
   const getUserLocation = () => {
     setIsLocating(true);
-    
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -85,6 +86,7 @@ export default function Index() {
     e.preventDefault();
     // In a real app, this would redirect to search results
     console.log("Searching for:", service, "in", location);
+    // Potentially navigate: navigate(`/search?service=${service}&location=${location}`);
   };
 
   return (
@@ -106,7 +108,7 @@ export default function Index() {
             {/* Left Content */}
             <div className="pr-0 lg:pr-8">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-yellow">Essential services. Effortless booking.</span> 
+                <span className="text-yellow">Essential services. Effortless booking.</span>
               </h1>
               <p className="text-lg mb-8 text-gray-200"> {/* Adjusted text color for better contrast */}
                 At the core of our mission, we are dedicatedly committed to
@@ -128,21 +130,32 @@ export default function Index() {
               {/* Search Box with Location */}
               <form onSubmit={handleSearch} className="flex flex-col gap-4">
                 <div className="flex flex-col sm:flex-row gap-4">
-                  {/* Service Search Input */}
+                  {/* Service Search Dropdown */}
                   <div className="relative flex-grow">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <FaSearch className="text-gray-400" />
                     </div>
-                    <input
-                      type="text"
-                      placeholder="What service do you need?"
-                      className="w-full pl-10 px-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow"
+                    <select
+                      className="w-full pl-10 pr-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow appearance-none" // Added appearance-none
                       value={service}
                       onChange={(e) => setService(e.target.value)}
                       required
-                    />
+                    >
+                      <option value="" disabled>Select a service</option>
+                      {popularServices.map((s) => (
+                        <option key={s.id} value={s.title}>
+                          {s.title}
+                        </option>
+                      ))}
+                    </select>
+                     {/* Custom dropdown arrow */}
+                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                      <svg className="w-4 h-4 fill-current text-gray-400" viewBox="0 0 20 20">
+                        <path d="M5.516 7.548c.436-.446 1.043-.481 1.576 0L10 10.405l2.908-2.857c.533-.481 1.141-.446 1.574 0 .436.445.408 1.197 0 1.615l-3.712 3.648c-.27.268-.63.402-.99.402s-.72-.134-.99-.402L5.516 9.163c-.409-.418-.436-1.17 0-1.615z"/>
+                      </svg>
+                    </div>
                   </div>
-                  
+
                   {/* Location Input */}
                   <div className="relative flex-grow">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -166,10 +179,10 @@ export default function Index() {
                     </button>
                   </div>
                 </div>
-                
+
                 {/* Search Button */}
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn btn-primary px-6 py-3 whitespace-nowrap"
                 >
                   Find Services
@@ -179,6 +192,7 @@ export default function Index() {
 
             {/* Right Content - Hero Image */}
             <div className="relative h-[1200px] mt-12 lg:mt-0">
+              {/* Image or other content can go here */}
             </div>
           </div>
         </div>
