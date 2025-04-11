@@ -106,7 +106,7 @@ export default function Index() {
             {/* Left Content */}
             <div className="pr-0 lg:pr-8">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-yellow">Essential services for your home</span> 
+                <span className="text-yellow">Essential services. Effortless booking.</span> 
               </h1>
               <p className="text-lg mb-8 text-gray-200"> {/* Adjusted text color for better contrast */}
                 At the core of our mission, we are dedicatedly committed to
