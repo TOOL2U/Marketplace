@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { Link, useNavigate } from "@remix-run/react";
 import { FaTools, FaPlug, FaTree, FaHammer, FaWrench, FaCheck, FaArrowRight, FaSearch, FaMapMarkerAlt } from "react-icons/fa";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
@@ -17,6 +17,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const navigate = useNavigate();
+  
   const popularServices = [
     { id: 1, title: "Plumbing", icon: <FaPlug className="text-3xl" />, description: "Fix leaks, installations, and repairs" },
     { id: 2, title: "Electrical", icon: <FaTools className="text-3xl" />, description: "Wiring, fixtures, and electrical repairs" },
@@ -84,9 +86,25 @@ export default function Index() {
   // Handle search submission
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would redirect to search results
-    console.log("Searching for:", service, "in", location);
-    // Potentially navigate: navigate(`/search?service=${service}&location=${location}`);
+    
+    if (service) {
+      // Navigate to the selected service page
+      navigate(`/services/${service.toLowerCase()}`);
+    } else {
+      // If no service is selected, navigate to the general services page
+      navigate('/services');
+    }
+  };
+
+  // Handle find services button click
+  const handleFindServicesClick = () => {
+    if (service) {
+      // Navigate to the selected service page
+      navigate(`/services/${service.toLowerCase()}`);
+    } else {
+      // If no service is selected, navigate to the general services page
+      navigate('/services');
+    }
   };
 
   return (
@@ -96,7 +114,7 @@ export default function Index() {
       {/* Hero Section - Modern Style with Background Image */}
       <section
         className="text-white py-16 md:py-24 lg:py-32 overflow-hidden relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('https://i.imgur.com/QfpfwtY.png')" }}
+        style={{ backgroundImage: "url('https://i.imgur.com/iYmAUnW.png')" }}
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/20 z-0"></div>
@@ -180,9 +198,10 @@ export default function Index() {
                   </div>
                 </div>
 
-                {/* Search Button */}
+                {/* Search Button - Modified to work with or without form submission */}
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleFindServicesClick}
                   className="btn btn-primary px-6 py-3 whitespace-nowrap"
                 >
                   Find Services
