@@ -1,16 +1,19 @@
-import { useParams, Link } from "@remix-run/react";
+import { useParams, Link, useNavigate } from "@remix-run/react";
 import { useState } from "react";
 import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaClock, FaCheck } from "react-icons/fa";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import { saveBooking } from "~/utils/bookingsStore"; // Import the saveBooking function
 
 export default function Booking() {
+  const navigate = useNavigate();
   const { providerId } = useParams();
   const [selectedService, setSelectedService] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [photo, setPhoto] = useState<File | null>(null);
   const [step, setStep] = useState(1);
 
   // Mock data for provider
@@ -38,16 +41,26 @@ export default function Booking() {
     if (step === 1) {
       setStep(2);
     } else {
-      // In a real app, this would submit the booking
-      console.log("Booking submitted:", {
-        providerId,
-        selectedService,
-        selectedDate,
-        selectedTime,
+      // Save the booking to our store
+      saveBooking({
+        providerId: provider.id,
+        providerName: provider.name,
+        providerImage: provider.image,
+        service: selectedService,
+        date: selectedDate,
+        time: selectedTime,
         address,
-        notes
+        notes,
+        status: 'confirmed'
       });
+      
       setStep(3);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhoto(e.target.files[0]);
     }
   };
 
@@ -147,34 +160,75 @@ export default function Booking() {
                         <option value="Evening (4PM - 8PM)">Evening (4PM - 8PM)</option>
                       </select>
                     </div>
-                    
+                    <div>
+                      <label className="block text-gray-700 font-medium mb-2">Your Name</label>
+                      <input 
+                        type="text" 
+                        className="w-full p-3 border border-gray-300 rounded-md"
+                        placeholder="Enter your full name"
+                        required
+                      />
+                    </div>
+                    <div>
+                   
+                    </div>
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">Your Address</label>
-                      <textarea 
-                        className="w-full p-3 border border-gray-300 rounded-md"
-                        rows={3}
-                        placeholder="Enter your full address"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        required
-                      ></textarea>
+                      <div className="flex">
+                        <input
+                          type="text"
+                          className="flex-grow p-3 border border-gray-300 rounded-l-md"
+                          placeholder="Enter your full address"
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                          required
+                        />
+                        <button
+                          type="button"
+                          className="bg-yellow text-black px-4 py-3 rounded-r-md transition-transform duration-300 hover:scale-105"
+                          onClick={() => {
+                            // This would use the browser's geolocation API in a real app
+                            alert("Geolocation would be requested here");
+                            // Example: setAddress("123 Detected Street, City, State")
+                          }}
+                        >
+                          <FaMapMarkerAlt className="mr-2 inline" />
+                          Find My Location
+                        </button>
+                      </div>
+
                     </div>
-                    
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">Additional Notes (Optional)</label>
+                      <label className="block text-gray-700 font-medium mb-2">Additional Notes</label>
                       <textarea 
                         className="w-full p-3 border border-gray-300 rounded-md"
-                        rows={3}
-                        placeholder="Any specific details about the service you need"
+                        rows={4}
+                        placeholder="Any specific requirements or notes?"
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                       ></textarea>
                     </div>
                     
+                    <div>
+                      <label className="block text-gray-700 font-medium mb-2">
+                        Upload a Photo (Optional)
+                      </label>
+                      
+                      <label className="cursor-pointer bg-yellow text-black px-4 py-3 rounded-md inline-block transition-transform duration-300 hover:scale-105">
+                        Choose File
+                        <input 
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleFileChange}
+                        />
+                      </label>
+                    </div>
+                    
                     <div className="flex justify-end">
                       <button 
                         type="submit"
-                        className="btn btn-primary"
+                        className="btn btn-primary transition-transform duration-300 hover:scale-105"
                       >
                         Continue
                       </button>
@@ -304,6 +358,9 @@ export default function Booking() {
                   We've sent a confirmation email with all the details. The service provider will contact you before the appointment.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link to="/bookings" className="btn btn-primary">
+                    View All Bookings
+                  </Link>
                   <Link to="/dashboard" className="btn btn-primary">
                     Go to Dashboard
                   </Link>

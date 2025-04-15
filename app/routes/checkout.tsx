@@ -1,6 +1,8 @@
+/// <reference types="@types/google.maps" />
 import React, { useEffect, useRef, useState } from 'react';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyDRDTFpVwaAjihQ1SLUuCeZLuIRhBj4seY';
+// Using Vite's environment variable convention
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 export default function Checkout() {
   const mapRef = useRef<HTMLDivElement>(null);

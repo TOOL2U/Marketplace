@@ -1,6 +1,7 @@
+// FILE: app/components/Header.tsx
 import { Link } from "@remix-run/react";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaCode } from "react-icons/fa";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +54,19 @@ export default function Header() {
             >
               About
             </Link>
+            <Link 
+              to="/developers" 
+              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium flex items-center"
+            >
+              <FaCode className="mr-1" /> Developers
+            </Link>
+            
+            <Link 
+              to="/bookings" 
+              className="text-yellow hover:brightness-110 hover:scale-105 transition-transform duration-200 font-medium"
+            >
+              My Bookings
+            </Link>
           </nav>
 
           {/* Auth buttons - desktop */}
@@ -104,6 +118,20 @@ export default function Header() {
               >
                 About
               </Link>
+              <Link 
+                to="/developers" 
+                className="text-yellow hover:brightness-110 font-medium block px-2 py-1 flex items-center" 
+                onClick={toggleMenu}
+              >
+                <FaCode className="mr-1" /> Developers
+              </Link>
+              <Link 
+                to="/bookings" 
+                className="text-yellow hover:brightness-110 font-medium block px-2 py-1" 
+                onClick={toggleMenu}
+              >
+                My Bookings
+              </Link>
               <div className="flex flex-col space-y-2 pt-2 border-t border-gray-700"> {/* Adjusted border color */}
                 <Link 
                   to="/login" 
@@ -127,4 +155,3 @@ export default function Header() {
     </header>
   );
 }
-
