@@ -18,7 +18,20 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const navigate = useNavigate();
-  
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Animation effect on page load
+  useEffect(() => {
+    // Small delay to ensure animation is noticeable
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Removed moon animation states and effects
+
   const popularServices = [
     { id: 1, title: "Plumbing", icon: <FaPlug className="text-3xl" />, description: "Fix leaks, installations, and repairs" },
     { id: 2, title: "Electrical", icon: <FaTools className="text-3xl" />, description: "Wiring, fixtures, and electrical repairs" },
@@ -86,7 +99,7 @@ export default function Index() {
   // Handle search submission
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (service) {
       // Navigate to the selected service page
       navigate(`/services/${service.toLowerCase()}`);
@@ -111,116 +124,109 @@ export default function Index() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      {/* Hero Section - Modern Style with Background Image */}
+      {/* Hero Section - Modern Style with Background Image and Centered Content */}
       <section
-        className="text-white py-16 md:py-24 lg:py-32 overflow-hidden relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('https://i.imgur.com/iYmAUnW.png')" }}
+        className="text-white min-h-screen bg-black overflow-hidden relative bg-cover bg-center bg-no-repeat z-0 flex items-center justify-center"
+        style={{ backgroundImage: 'url("https://i.imgur.com/1YidZv1.png")' }}
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/20 z-0"></div>
 
+        {/* Removed starfield effect */}
 
-        {/* Content Container */}
-        <div className="container-custom relative z-10"> {/* Ensure content is above overlay */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left Content */}
-            <div className="pr-0 lg:pr-8">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-yellow">Essential services. Effortless booking.</span>
-              </h1>
-              <p className="text-lg mb-8 text-gray-200"> {/* Adjusted text color for better contrast */}
-                At the core of our mission, we are dedicatedly committed to
-                supporting homeowners. With unwavering passion, we
-                pave the way for your comfort and peace of mind.
-              </p>
+        {/* Removed moon element */}
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="flex items-center">
-                  <FaCheck className="text-yellow mr-2" />
-                  <span>Free quotation</span>
+        {/* Removed enhanced light rays */}
+
+        {/* Removed ambient light effect */}
+
+        {/* Content Container - Centered */}
+        <div className="container-custom relative z-10 mx-auto py-12 flex justify-center items-center h-full">
+          <div className="max-w-5xl my-auto">
+            <h1 className={`text-7xl md:text-8xl lg:text-9xl font-rational-display font-extrabold mb-5 text-center leading-tight tracking-tighter transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <span className="block text-transparent bg-gradient-to-r from-white to-yellow bg-clip-text drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] filter blur-[0.2px]">Essential services.</span>
+              <span className="block text-transparent bg-gradient-to-r from-white to-yellow bg-clip-text drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] py-2 filter blur-[0.2px]">Effortless booking.</span>
+            </h1>
+            <p className={`text-lg mb-10 text-white text-center font-rational-display font-light transition-all duration-1000 delay-200 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              At the core of our mission, we are dedicatedly committed to
+              supporting homeowners. With unwavering passion, we
+              pave the way for your comfort and peace of mind.
+            </p>
+
+
+
+            {/* Search Box with Location */}
+            <form onSubmit={handleSearch} className={`flex flex-col gap-5 transition-all duration-1000 delay-400 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Service Search Dropdown */}
+                <div className="relative flex-grow">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                    <FaSearch className="text-white" />
+                  </div>
+                  <select
+                    className="w-full pl-10 px-4 py-3 rounded-md text-white bg-black border border-yellow focus:outline-none focus:border-yellow font-rational-display font-light"
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    required
+                  >
+                    <option value="" disabled className="font-rational-display font-light">Select a service</option>
+                    {popularServices.map((s) => (
+                      <option key={s.id} value={s.title} className="font-rational-display font-light">
+                        {s.title}
+                      </option>
+                    ))}
+                  </select>
+                   {/* Custom dropdown arrow */}
+                   <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none font-rational-display font-light ">
+                    <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 20 20 ">
+                      <path d="M5.516 7.548c.436-.446 1.043-.481 1.576 0L10 10.405l2.908-2.857c.533-.481 1.141-.446 1.574 0 .436.445.408 1.197 0 1.615l-3.712 3.648c-.27.268-.63.402-.99.402s-.72-.134-.99-.402L5.516 9.163c-.409-.418-.436-1.17 0-1.615z"/>
+                    </svg>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <FaCheck className="text-yellow mr-2" />
-                  <span>Fast responses</span>
+
+                {/* Location Input */}
+                <div className="relative flex-grow">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <FaMapMarkerAlt className="text-white" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Your location"
+                    className="w-full pl-10 px-4 py-3 rounded-md text-white bg-black border border-yellow focus:outline-none focus:border-yellow font-rational-display font-light placeholder:text-white placeholder:font-rational-display placeholder:font-light"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={getUserLocation}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-yellow hover:text-yellow-bright"
+                    disabled={isLocating}
+                  >
+                    {isLocating ? "Locating..." : "Find me"}
+                  </button>
                 </div>
               </div>
 
-              {/* Search Box with Location */}
-              <form onSubmit={handleSearch} className="flex flex-col gap-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  {/* Service Search Dropdown */}
-                  <div className="relative flex-grow">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <FaSearch className="text-gray-400" />
-                    </div>
-                    <select
-                      className="w-full pl-10 pr-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow appearance-none" // Added appearance-none
-                      value={service}
-                      onChange={(e) => setService(e.target.value)}
-                      required
-                    >
-                      <option value="" disabled>Select a service</option>
-                      {popularServices.map((s) => (
-                        <option key={s.id} value={s.title}>
-                          {s.title}
-                        </option>
-                      ))}
-                    </select>
-                     {/* Custom dropdown arrow */}
-                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      <svg className="w-4 h-4 fill-current text-gray-400" viewBox="0 0 20 20">
-                        <path d="M5.516 7.548c.436-.446 1.043-.481 1.576 0L10 10.405l2.908-2.857c.533-.481 1.141-.446 1.574 0 .436.445.408 1.197 0 1.615l-3.712 3.648c-.27.268-.63.402-.99.402s-.72-.134-.99-.402L5.516 9.163c-.409-.418-.436-1.17 0-1.615z"/>
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Location Input */}
-                  <div className="relative flex-grow">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <FaMapMarkerAlt className="text-gray-400" />
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Your location"
-                      className="w-full pl-10 px-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={getUserLocation}
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-yellow hover:text-yellow-bright"
-                      disabled={isLocating}
-                    >
-                      {isLocating ? "Locating..." : "Find me"}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Search Button - Modified to work with or without form submission */}
-                <button
-                  type="button"
-                  onClick={handleFindServicesClick}
-                  className="btn btn-primary px-6 py-3 whitespace-nowrap"
-                >
-                  Find Services
-                </button>
-              </form>
-            </div>
-
-            {/* Right Content - Hero Image */}
-            <div className="relative h-[1200px] mt-12 lg:mt-0">
-              {/* Image or other content can go here */}
-            </div>
+              {/* Search Button - Modified to work with or without form submission */}
+              <button
+                type="button"
+                onClick={handleFindServicesClick}
+                className={`btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-yellow text-black shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse transition-all duration-1000 delay-600 ease-out ${isLoaded ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-95'}`}
+              >
+                Find Services
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
       {/* Popular Services */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-black text-white"
+      style={{ backgroundImage: 'url("https://i.imgur.com/1YidZv1.png")' }}
+      >
         <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-12 text-center">Popular Services</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-white">Popular Services</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {popularServices.map((service) => (
               <ServiceCard
@@ -232,7 +238,7 @@ export default function Index() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/services" className="btn btn-primary">
+            <Link to="/services" className="btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-yellow text-black shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse hover:bg-yellow-400 transition-all duration-300">
               View All Services
             </Link>
           </div>
@@ -240,39 +246,43 @@ export default function Index() {
       </section>
 
       {/* How It Works */}
-      <section className="py-16">
+      <section className="py-16 bg-black text-white"
+      style={{ backgroundImage: 'url("https://i.imgur.com/1YidZv1.png")' }}
+      >
         <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-12 text-center">How It Works</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-white font-rational-display font-light">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center group">
-              <div className="bg-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110">
+              <div className="btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-black text-yellow shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse hover:bg-yellow-400 transition-all duration-300 font-rational-display font-light">
                 <span className="text-yellow text-2xl font-bold">1</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Search</h3>
-              <p className="text-gray-600">Find the service you need from our wide range of home maintenance options</p>
+              <h3 className="text-xl font-semibold mb-2 text-white">Search</h3>
+              <p className="text-gray-300 font-rational-display font-light">Find the service you need from our wide range of home maintenance options</p>
             </div>
             <div className="text-center group">
-              <div className="bg-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110">
+              <div className="btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-black text-yellow shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse hover:bg-yellow-400 transition-all duration-300 font-rational-display font-light">
                 <span className="text-yellow text-2xl font-bold">2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Book</h3>
-              <p className="text-gray-600">Select a professional based on reviews, pricing, and availability</p>
+              <h3 className="text-xl font-semibold mb-2 text-white">Book</h3>
+              <p className="text-gray- font-rational-display font-light">Select a professional based on reviews, pricing, and availability</p>
             </div>
             <div className="text-center group">
-              <div className="bg-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110">
+              <div className="btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-black text-yellow shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse hover:bg-yellow-400 transition-all duration-300 font-rational-display font-light">
                 <span className="text-yellow text-2xl font-bold">3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Relax</h3>
-              <p className="text-gray-600">Your professional will arrive at the scheduled time to complete the job</p>
+              <h3 className="text-xl font-semibold mb-2 text-white">Relax</h3>
+              <p className="text-gray-300 font-rational-display font-light">Your professional will arrive at the scheduled time to complete the job</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-gray-50">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-12 text-center">What Our Customers Say</h2>
+      <section className="py-16 bg-black">
+        <div className="container-custom"
+        style={{ backgroundImage: 'url("https://i.imgur.com/1YidZv1.png")' }}
+        >
+          <h2 className="text-3xl font-bold mb-12 text-center text-white font-rational-display font-light ">What Our Customers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
               <TestimonialCard
@@ -292,14 +302,14 @@ export default function Index() {
       <section className="py-16 bg-black text-white">
         <div className="container-custom text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-2xl mx-auto font-rational-display font-light">
             Join thousands of satisfied customers who have found reliable home maintenance professionals through our platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/services" className="btn btn-primary">
+            <Link to="/services" className="btn btn-primary btn btn-primary px-6 py-3 whitespace-nowrap px-4 py-2 rounded-xl bg-yellow text-black shadow-[0_0_15px_rgba(255,255,0,0.6)] animate-pulse hover:bg-yellow-400 transition-all duration-300">
               Find a Service
             </Link>
-            <Link to="/signup" className="btn btn-outline border-white text-white hover:bg-white hover:text-black">
+            <Link to="/signup" className="btn btn-outline border-white rounded-xl text-white hover:bg-white hover:text-black">
               Become a Provider
             </Link>
           </div>

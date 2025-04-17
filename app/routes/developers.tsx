@@ -4,7 +4,7 @@ import { useLoaderData, Link } from "@remix-run/react";
 import { useState } from "react";
 import { FaCode, FaBookmark, FaTasks, FaBug, FaUsers, FaDatabase, FaCalendarAlt } from "react-icons/fa";
 import Header from "~/components/Header";
-import Footer from "~/components/Footer";
+import Footer from "~/components/Header";
 
 export async function loader() {
   // In a real implementation, you might fetch data from your backend
@@ -48,7 +48,7 @@ export default function DevelopersPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex justify-center items-center h-screen">
       <Header />
       
       <div className="container-custom py-24">

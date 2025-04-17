@@ -8,6 +8,7 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import "./styles/navigation.css"; // Import our custom navigation styles
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -22,12 +23,6 @@ export const links: LinksFunction = () => [
   },
 ];
 
-// Estimate header height (adjust if necessary based on final styling/content)
-// py-4 = 1rem padding top/bottom = 16px * 2 = 32px
-// text-2xl line height ~ 2rem = 32px
-// Total approx height = 64px. Let's use pt-20 (80px) for safety.
-const HEADER_HEIGHT_PADDING = "pt-20"; // Adjust this value if header height changes
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -37,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className={`bg-white ${HEADER_HEIGHT_PADDING}`}> {/* Add padding to body */}
+      <body className="bg-white"> {/* Removed padding from body */}
         {children}
         <ScrollRestoration />
         <Scripts />

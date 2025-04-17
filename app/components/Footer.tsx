@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-white">Fix<span className="text-yellow">It</span></span>
+              <span className="text-2xl block text-transparent bg-gradient-to-r from-white to-yellow bg-clip-text drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] py-2 filter blur-[0.2px] font-rational-display font-light">-SIA HOME-</span>
             </Link>
             <p className="text-gray-400 mb-4">
               Connecting homeowners with trusted maintenance professionals since 2023.

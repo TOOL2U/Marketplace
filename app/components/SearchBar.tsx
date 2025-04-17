@@ -73,7 +73,7 @@ export default function SearchBar({ onSearch, className = "" }: SearchBarProps) 
         <input
           type="text"
           placeholder="Your location"
-          className="w-full pl-10 px-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow"
+          className="w-full pl-10 px-4 py-3 rounded-md bg-darkgray border border-gray-700 text-white focus:outline-none focus:border-yellow font-rational-display font-light"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           required

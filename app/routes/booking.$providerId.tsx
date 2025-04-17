@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaClock, FaCheck } from "react-icons/fa";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import { saveBooking } from "~/utils/bookingsStore"; // Import the saveBooking function
+import { saveBooking } from "~/utils/bookingsstore"; // Fixed casing to match the actual filename
 
 export default function Booking() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Booking() {
 
   // Mock data for provider
   const provider = {
-    id: providerId,
+    id: providerId || "", // Added fallback for potential undefined value
     name: "John Smith",
     service: "Plumbing",
     rating: 4.9,

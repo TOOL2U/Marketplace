@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "@remix-run/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import { getBookings, Booking } from "~/utils/bookingsStore";
+import { getBookings, Booking } from "~/utils/bookingsstore"; // Fixed casing to match the actual filename
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaArrowLeft } from "react-icons/fa";
 
 export default function BookingDetail() {

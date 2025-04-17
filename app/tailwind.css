@@ -2,12 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font Face Definitions */
+@font-face {
+  font-family: 'RationalTWDisplay';
+  src: url('/fonts/rationaltwdisplaydemo-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RationalTWDisplay';
+  src: url('/fonts/rationaltwdisplaydemo-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RationalTWText';
+  src: url('/fonts/rationaltwtextdemo-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RationalTWText';
+  src: url('/fonts/rationaltwtextdemo-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   body {
-    @apply font-sans text-darkgray; /* Default text color for body content */
+    @apply font-rational-text text-darkgray; /* Updated to use new font */
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-black; /* Default heading color */
+    @apply font-rational-display font-bold text-black; /* Updated to use new font */
   }
 }
 

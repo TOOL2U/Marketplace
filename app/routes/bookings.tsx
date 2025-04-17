@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "@remix-run/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import { getBookings, Booking as StoredBooking } from "~/utils/bookingsStore";
+import { getBookings, Booking as StoredBooking } from "~/utils/bookingsstore";
 import { FaSearch, FaFilter, FaSortAmountDown, FaSortAmountUp, FaEye, FaEdit, FaTrash, FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 
 // Mock data type for bookings
@@ -293,7 +293,7 @@ export default function BookingsPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <div className="container-custom py-24">
+      <div className="container-custom py-24 flex-grow">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Bookings Management</h1>
           <div className="flex space-x-2">
